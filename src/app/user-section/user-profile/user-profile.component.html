@@ -1,0 +1,106 @@
+
+
+<div class="container bootstrap snippets bootdey">
+  <div class="row">
+    <div class="profile-nav col-md-3">
+      <div class="panel">
+        <div class="user-heading round" >
+          <a *ngIf="!userDetails.profilePic" href="#">
+            <img src="https://bootdey.com/img/Content/avatar/avatar3.png" alt="">
+          </a>
+          <a *ngIf="userDetails.profilePic" href="#">
+            <img [src]="userDetails.profilePic" alt="">
+          </a>
+              <h1>{{userDetails.fullName}}</h1>
+          <p>{{userDetails.email}}</p>
+        </div>
+
+        <ul class="nav nav-pills nav-stacked">
+          <li (click)="enableEdit()"><a> <i class="fa fa-edit"></i> Edit profile</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="profile-info col-md-9">
+      <div class="panel">
+        <div class="bio-graph-heading">
+          Here Comes Your Bio
+        </div>
+        <div class="panel-body bio-graph-info">
+          <div>
+            <h1>My Profile</h1>
+          </div>
+
+          <form #signUpForm="ngForm" (ngSubmit)="signUpForm.valid && onSubmit(signUpForm)">
+            <div class="col-md-12">
+              <div class="col-md-6">
+                <h4>Full Name</h4>
+              </div>
+              <div class="col-md-6">
+                <input style="font-size: large;" [disabled]="editSwitch === false" type="text" #fullName="ngModel"
+                  [(ngModel)]="userDetails.fullName" name="fullName" placeholder="Full Name" required
+                  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !fullName.valid && editSwitch === true }">
+                <div *ngIf="signUpForm.submitted && !fullName.valid && editSwitch === true">
+                  <label class="validation-message">This field is required.</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="col-md-6">
+                <h4>City</h4>
+              </div>
+              <div class="col-md-6">
+                <input style="font-size: large;" [disabled]="editSwitch === false" type="text" #city="ngModel"
+                  [(ngModel)]="userDetails.city" name="city" placeholder="City" required
+                  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !city.valid && editSwitch === true }">
+                <div *ngIf="signUpForm.submitted && !city.valid && editSwitch === true">
+                  <label class="validation-message">This field is required.</label>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <div class="col-md-6">
+                <h4>State</h4>
+              </div>
+              <div class="col-md-6">
+                <input style="font-size: large;" [disabled]="editSwitch===false" type="text" #state="ngModel"
+                  [(ngModel)]="userDetails.state" name="state" placeholder="State" required
+                  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !state.valid && editSwitch === true }">
+                <div *ngIf="signUpForm.submitted && !state.valid && editSwitch === true">
+                  <label class="validation-message">This field is required.</label>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-md-12">
+              <div class="col-md-6">
+                <h4>Country</h4>
+              </div>
+              <div class="col-md-6">
+                <input style="font-size: large;" [disabled]="editSwitch===false" type="text" #country="ngModel"
+                  [(ngModel)]="userDetails.country" name="country" placeholder="Country" required
+                  [ngClass]="{'invalid-textbox' :signUpForm.submitted && !country.valid && editSwitch === true }">
+                <div *ngIf="signUpForm.submitted && !country.valid && editSwitch === true">
+                  <label class="validation-message">This field is required.</label>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-12">
+              <div class="col-md-6">
+                <h4 *ngIf="editSwitch === false">Email Address</h4>
+              </div>
+              <div class="col-md-6"> <input style="font-size: large;" *ngIf="editSwitch === false" disabled type="text"
+                  #email="ngModel" [(ngModel)]="userDetails.email" name="email" placeholder="Email"></div>
+            </div>
+<div class="col-md-12">
+    <div class="col-md-6 text-center"><button class="btn btn-warning" style="font-size: large;" *ngIf="editSwitch === true" type="submit" >Update</button></div>
+    <div class="col-md-6"><button class="btn btn-secondary" style="font-size: large;" type="button" *ngIf="editSwitch === true" (click)="editSwitch = false" >Cancel</button></div>
+</div>
+          </form>
+        </div>
+      </div>   
+    </div>
+  </div>
+</div>
+<ngx-spinner></ngx-spinner>
